@@ -46,25 +46,53 @@ public class Drone {
         // let's be a sorter: Take the first sorter task.
         SorterTask task = sorterTasks.remove(0);
 
-        return executeSorterTurn(task, instance);
+        return executeSorterTurn(sorterTasks, task, instance);
     }
 
     private DroneInstruction executeDelivererTurn() {
         return null;
     }
 
-    private DroneInstruction executeSorterTurn(SorterTask task, ProblemInstance instance) {
+    private DroneInstruction executeSorterTurn(ArrayList<SorterTask> sorterTasks, SorterTask task, ProblemInstance instance) {
+/*
         // calculate task weight;
         int weight = task.getWeight(instance);
 
         if (weight > instance.droneMaxLoad){
             SorterTask cutoff = splitOrder(task);
-
-        } else {
-
+            sorterTasks.add(cutoff);
         }
 
+        // Now, the task "task" is valid to be executed.
+
+        // Find Deliverer:
+
+*/
+
+        // Find the warehouse closest to the destination.
+        int closestWarehouseIndex = calcClosestWarehouseIndex(task, instance);
+
+        DroneInstruction instr = prepareOrder(task, closestWarehouseIndex, instance, sorterTasks);
+
+
+        return instr;
+    }
+
+    private DroneInstruction prepareOrder(SorterTask task, int warehouseId, ProblemInstance instance, ArrayList<SorterTask> sorterTasks) {
+        int weight = task.getWeight(instance);
+
+        if (weight > instance.droneMaxLoad){
+            SorterTask cutoff = splitOrder(task);
+            sorterTasks.add(cutoff);
+        }
+
+
+
         return null;
+    }
+
+    private int calcClosestWarehouseIndex(SorterTask task, ProblemInstance instance) {
+        return 0;
     }
 
     private SorterTask splitOrder(SorterTask task) {
