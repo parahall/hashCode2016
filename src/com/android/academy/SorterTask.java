@@ -9,7 +9,8 @@ public class SorterTask {
     public SorterTask(int row, int col, int[] orderlines) {
         targetRow = row;
         targetColumn = col;
-        itemsQuantity = orderlines;
+        itemsQuantity = new int[orderlines.length];
+        System.arraycopy(orderlines, 0, itemsQuantity, 0, orderlines.length);
     }
 
     public int getWeight(ProblemInstance instance) {
