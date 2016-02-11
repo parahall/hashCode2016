@@ -1,6 +1,7 @@
 package com.android.academy;
 
 import java.io.*;
+import java.util.ArrayList;
 
 public class Main {
 
@@ -10,16 +11,16 @@ public class Main {
         for (String arg : args) {
             ProblemInstance instance = initParsing(arg);
 
-            DroneInstruction[] solution = Solver.solve(instance);
+            ArrayList<DroneInstruction> solution = Solver.solve(instance);
 
             writeSolutionsToFile(arg, solution);
         }
 
     }
 
-    private static void writeSolutionsToFile(String arg, DroneInstruction[] solution) throws IOException {
+    private static void writeSolutionsToFile(String arg, ArrayList<DroneInstruction> solution) throws IOException {
         PrintWriter printWriter = new PrintWriter(arg+ FILE_OUTPUT_SUFFIX);
-        printWriter.println(solution.length);
+        printWriter.println(solution.size());
         for (DroneInstruction aSolution : solution) {
             printWriter.println(aSolution.toLine());
         }
@@ -85,7 +86,7 @@ public class Main {
 
     private static void initProductWeights(ProblemInstance problemInstance, BufferedReader br) throws IOException {
         String line = br.readLine();
-        problemInstance.productWegihts = new int[Integer.parseInt(line)];
+        problemInstance.productWeights = new int[Integer.parseInt(line)];
     }
 
     private static void parseProductWeights(ProblemInstance problemInstance, BufferedReader br) throws IOException {
@@ -93,7 +94,7 @@ public class Main {
         String[] split;
         split = line.split(" ");
         for (int j = 0; j < split.length; j++) {
-            problemInstance.productWegihts[j] = Integer.parseInt(split[j]);
+            problemInstance.productWeights[j] = Integer.parseInt(split[j]);
         }
     }
 

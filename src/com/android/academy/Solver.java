@@ -13,6 +13,12 @@ public class Solver {
         ArrayList<DroneInstruction> instuctions = new ArrayList<>();
 
         ArrayList<SorterTask> sorterTasks = new ArrayList<>();
+        for (Order order : instance.orders) {
+            sorterTasks.add(new SorterTask(order.row, order.col, order.orderlines));
+        }
+
+
+        ArrayList<DeliveryTask> DeliveryTasks = new ArrayList<>();
         ArrayList<DeliveryTask> deliveryTasks = new ArrayList<>();
 
         ArrayList<Drone> drones = new ArrayList<>();
