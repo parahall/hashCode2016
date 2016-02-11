@@ -85,7 +85,7 @@ public class Main {
 
     private static void initProductWeights(ProblemInstance problemInstance, BufferedReader br) throws IOException {
         String line = br.readLine();
-        problemInstance.productWegihts = new int[Integer.parseInt(line)];
+        problemInstance.productWeights = new int[Integer.parseInt(line)];
     }
 
     private static void parseProductWeights(ProblemInstance problemInstance, BufferedReader br) throws IOException {
@@ -93,7 +93,7 @@ public class Main {
         String[] split;
         split = line.split(" ");
         for (int j = 0; j < split.length; j++) {
-            problemInstance.productWegihts[j] = Integer.parseInt(split[j]);
+            problemInstance.productWeights[j] = Integer.parseInt(split[j]);
         }
     }
 

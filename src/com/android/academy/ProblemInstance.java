@@ -10,7 +10,7 @@ public class ProblemInstance {
     public int droneMaxLoad;
 
 
-    public int[] productWegihts;
+    public int[] productWeights;
 
     public Warehouse[] warehouses;
 

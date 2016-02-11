@@ -2,9 +2,6 @@ package com.android.academy;
 
 import java.util.ArrayList;
 
-/**
- * Created by idan on 11/02/16.
- */
 public class Solver {
     public static ArrayList<DroneInstruction> solve(ProblemInstance instance) {
         ArrayList<DroneInstruction> instuctions = new ArrayList<>();
