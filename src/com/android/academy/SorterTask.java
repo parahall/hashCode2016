@@ -12,8 +12,4 @@ public class SorterTask {
         itemsQuantity = new int[orderlines.length];
         System.arraycopy(orderlines, 0, itemsQuantity, 0, orderlines.length);
     }
-
-    public int getWeight(ProblemInstance instance) {
-        return -1;
-    }
 }
