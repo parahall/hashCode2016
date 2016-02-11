@@ -29,8 +29,8 @@ public class Main {
                 parseSimulationParams(problemInstance, br);
                 initProductWeights(problemInstance, br);
                 parseProductWeights(problemInstance, br);
-                parseNumberWarehouses(problemInstance, br);
                 parseWarehousesContent(problemInstance, br);
+                parseCustomerOrders(problemInstance, br);
             } catch (IOException e) {
             }
         }
@@ -38,9 +38,31 @@ public class Main {
         return problemInstance;
     }
 
+    private static void parseCustomerOrders(ProblemInstance problemInstance, BufferedReader br) throws IOException {
+        String line = br.readLine();
+        problemInstance.orders = new Order[Integer.parseInt(line)];
+        for (int i = 0; i < problemInstance.orders.length; i++) {
+            line = br.readLine();
+            String[] location = line.split(" ");
+            problemInstance.orders[i] = new Order();
+            problemInstance.orders[i].row = Integer.parseInt(location[0]);
+            problemInstance.orders[i].col = Integer.parseInt(location[1]);
+            line = br.readLine();
+            problemInstance.orders[i].orderlines = new int[Integer.parseInt(line)];
+            line = br.readLine();
+            String[] items = line.split(" ");
+            for (int j = 0; j < problemInstance.orders[i].orderlines.length; j++) {
+                problemInstance.orders[i].orderlines[j] = Integer.parseInt(items[j]);
+            }
+        }
+
+    }
+
     private static void parseWarehousesContent(ProblemInstance problemInstance, BufferedReader br) throws IOException {
+        String line = br.readLine();
+        problemInstance.warehouses = new Warehouse[Integer.parseInt(line)];
         for (int i = 0; i < problemInstance.warehouses.length; i++) {
-            String line = br.readLine();
+            line = br.readLine();
             String[] location = line.split(" ");
             problemInstance.warehouses[i] = new Warehouse();
             problemInstance.warehouses[i].row = Integer.parseInt(location[0]);
@@ -52,11 +74,6 @@ public class Main {
                 problemInstance.warehouses[i].availableStock[j] = Integer.parseInt(stock[j]);
             }
         }
-    }
-
-    private static void parseNumberWarehouses(ProblemInstance problemInstance, BufferedReader br) throws IOException {
-        String line = br.readLine();
-        problemInstance.warehouses = new Warehouse[Integer.parseInt(line)];
     }
 
     private static void initProductWeights(ProblemInstance problemInstance, BufferedReader br) throws IOException {
