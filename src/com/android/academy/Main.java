@@ -1,21 +1,29 @@
 package com.android.academy;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
 
-    public static void main(String[] args) {
-        ProblemInstance instance = initParsing(args[0]);
+    private static final String FILE_OUTPUT_SUFFIX = "solution.txt";
 
-        DroneInstruction[] solution = Solver.solve(instance);
+    public static void main(String[] args) throws IOException {
+        for (String arg : args) {
+            ProblemInstance instance = initParsing(arg);
 
-        writeSolutionsToFile(solution);
+            DroneInstruction[] solution = Solver.solve(instance);
+
+            writeSolutionsToFile(arg, solution);
+        }
 
     }
 
-    private static void writeSolutionsToFile(DroneInstruction[] solution) {
+    private static void writeSolutionsToFile(String arg, DroneInstruction[] solution) throws IOException {
+        PrintWriter printWriter = new PrintWriter(arg+ FILE_OUTPUT_SUFFIX);
+        printWriter.println(solution.length);
+        for (DroneInstruction aSolution : solution) {
+            printWriter.println(aSolution.toLine());
+        }
+
 
     }
 
@@ -23,15 +31,14 @@ public class Main {
         ProblemInstance problemInstance = null;
 
         if (arg != null && arg.length() > 0) {
-            String input = arg;
-            try (BufferedReader br = new BufferedReader(new FileReader(input))) {
+            try (BufferedReader br = new BufferedReader(new FileReader(arg))) {
                 problemInstance = new ProblemInstance();
                 parseSimulationParams(problemInstance, br);
                 initProductWeights(problemInstance, br);
                 parseProductWeights(problemInstance, br);
                 parseWarehousesContent(problemInstance, br);
                 parseCustomerOrders(problemInstance, br);
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
         }
 
