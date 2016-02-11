@@ -4,19 +4,21 @@ import java.io.*;
 
 public class Main {
 
-    private static final String FILE_OUTPUT_NAME = "solution.txt";
+    private static final String FILE_OUTPUT_SUFFIX = "solution.txt";
 
     public static void main(String[] args) throws IOException {
-        ProblemInstance instance = initParsing(args[0]);
+        for (String arg : args) {
+            ProblemInstance instance = initParsing(arg);
 
-        DroneInstruction[] solution = Solver.solve(instance);
+            DroneInstruction[] solution = Solver.solve(instance);
 
-        writeSolutionsToFile(solution);
+            writeSolutionsToFile(arg, solution);
+        }
 
     }
 
-    private static void writeSolutionsToFile(DroneInstruction[] solution) throws IOException {
-        PrintWriter printWriter = new PrintWriter(FILE_OUTPUT_NAME);
+    private static void writeSolutionsToFile(String arg, DroneInstruction[] solution) throws IOException {
+        PrintWriter printWriter = new PrintWriter(arg+ FILE_OUTPUT_SUFFIX);
         printWriter.println(solution.length);
         for (DroneInstruction aSolution : solution) {
             printWriter.println(aSolution.toLine());
