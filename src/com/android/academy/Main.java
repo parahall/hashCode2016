@@ -1,12 +1,12 @@
 package com.android.academy;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 public class Main {
 
-    public static void main(String[] args) {
+    private static final String FILE_OUTPUT_NAME = "solution.txt";
+
+    public static void main(String[] args) throws IOException {
         ProblemInstance instance = initParsing(args[0]);
 
         DroneInstruction[] solution = Solver.solve(instance);
@@ -15,7 +15,13 @@ public class Main {
 
     }
 
-    private static void writeSolutionsToFile(DroneInstruction[] solution) {
+    private static void writeSolutionsToFile(DroneInstruction[] solution) throws IOException {
+        PrintWriter printWriter = new PrintWriter(FILE_OUTPUT_NAME);
+        printWriter.println(solution.length);
+        for (DroneInstruction aSolution : solution) {
+            printWriter.println(aSolution.toLine());
+        }
+
 
     }
 
@@ -23,15 +29,14 @@ public class Main {
         ProblemInstance problemInstance = null;
 
         if (arg != null && arg.length() > 0) {
-            String input = arg;
-            try (BufferedReader br = new BufferedReader(new FileReader(input))) {
+            try (BufferedReader br = new BufferedReader(new FileReader(arg))) {
                 problemInstance = new ProblemInstance();
                 parseSimulationParams(problemInstance, br);
                 initProductWeights(problemInstance, br);
                 parseProductWeights(problemInstance, br);
                 parseWarehousesContent(problemInstance, br);
                 parseCustomerOrders(problemInstance, br);
-            } catch (IOException e) {
+            } catch (IOException ignored) {
             }
         }
 

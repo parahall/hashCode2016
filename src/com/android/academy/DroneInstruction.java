@@ -44,7 +44,7 @@ public class DroneInstruction {
     }
 
     public String toLine(){
-        return "" + droneId + " " + action + " " + params;
+        return String.format("%d %s %s", droneId, action, params);
     }
 
 }
