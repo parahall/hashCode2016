@@ -9,7 +9,6 @@ public class ProblemInstance {
     public int deadline;
     public int droneMaxLoad;
 
-
     public int[] productWeights;
 
     public Warehouse[] warehouses;

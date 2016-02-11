@@ -55,7 +55,7 @@ public class Drone {
 
     private DroneInstruction executeSorterTurn(SorterTask task, ProblemInstance instance) {
         // calculate task weight;
-        int weight = task.getWeight(instance);
+        int weight = task.getWeight();
 
         if (weight > instance.droneMaxLoad){
             SorterTask cutoff = splitOrder(task);
