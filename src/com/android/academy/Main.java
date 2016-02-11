@@ -7,23 +7,35 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        initParsing(args[0]);
+        ProblemInstance instance = initParsing(args[0]);
+
+        DroneInstruction[] solution = Solver.solve(instance);
+
+        writeSolutionsToFile(solution);
+
     }
 
-    private static void initParsing(String arg) {
+    private static void writeSolutionsToFile(DroneInstruction[] solution) {
+
+    }
+
+    private static ProblemInstance initParsing(String arg) {
+        ProblemInstance problemInstance = null;
+
         if (arg != null && arg.length() > 0) {
             String input = arg;
-            ProblemInstance problemInstance = new ProblemInstance();
             try (BufferedReader br = new BufferedReader(new FileReader(input))) {
+                problemInstance = new ProblemInstance();
                 parseSimulationParams(problemInstance, br);
                 initProductWeights(problemInstance, br);
                 parseProductWeights(problemInstance, br);
                 parseNumberWarehouses(problemInstance, br);
                 parseWarehousesContent(problemInstance, br);
             } catch (IOException e) {
-                e.printStackTrace();
             }
         }
+
+        return problemInstance;
     }
 
     private static void parseWarehousesContent(ProblemInstance problemInstance, BufferedReader br) throws IOException {
