@@ -11,4 +11,8 @@ public class SorterTask {
         targetColumn = col;
         itemsQuantity = orderlines;
     }
+
+    public int getWeight(ProblemInstance instance) {
+        return -1;
+    }
 }

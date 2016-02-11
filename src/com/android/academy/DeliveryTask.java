@@ -13,5 +13,6 @@ public class DeliveryTask {
 
     public int[] itemsQuantity;
 
+    public int droneId;
 
 }

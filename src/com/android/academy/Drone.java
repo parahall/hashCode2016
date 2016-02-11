@@ -7,7 +7,13 @@ import java.util.ArrayList;
  */
 public class Drone {
 
-    boolean isSorter = true; // ByDefault.
+    int id = -1;
+
+    public Drone(int id, int currentRow, int currentCol) {
+        this.id = id;
+        this.currentRow = currentRow;
+        this.currentCol = currentCol;
+    }
 
     public int currentRow;
     public int currentCol;
@@ -15,28 +21,41 @@ public class Drone {
     public int movmentStartTime;
     public int movmentEndTime;
 
-    public DroneInstruction ExecuteTurn(ArrayList<SorterTask> sorterTasks, ArrayList<DeliveryTask> deliveryTasks){
 
 
+    public DroneInstruction ExecuteTurn(ProblemInstance instance,
+                                        ArrayList<SorterTask> sorterTasks,
+                                        ArrayList<DeliveryTask> deliveryTasks){
 
-
-        DroneInstruction instruction;
-
-        if (isSorter)
-        {
-            instruction = executeSorterTurn(sorterTasks);
-        } else {
-            instruction = executeDelivererTurn();
+        // go over delivery tasks.
+        // if any are on me, execute 'em.
+        int deliveryTaskIndex = -1;
+        for (int i = 0; i < deliveryTasks.size(); i ++){
+            DeliveryTask task = deliveryTasks.get(i);
+            if (task.droneId == this.id){
+                deliveryTaskIndex = i;
+                break;
+            }
         }
 
-        return instruction;
+        if (deliveryTaskIndex > -1){
+            return executeDelivererTurn();
+        }
+
+        // No Delivery Task for me!
+        // let's be a sorter: Take the first sorter task.
+        SorterTask task = sorterTasks.remove(0);
+
+        return executeSorterTurn(task, instance);
     }
 
     private DroneInstruction executeDelivererTurn() {
         return null;
     }
 
-    private DroneInstruction executeSorterTurn(ArrayList<SorterTask> sorterTasks) {
+    private DroneInstruction executeSorterTurn(SorterTask task, ProblemInstance instance) {
+        // calculate task weight;
+        int weight = task.getWeight(instance);
 
 
         return null;

@@ -20,11 +20,11 @@ public class Solver {
         ArrayList<DeliveryTask> deliveryTasks = new ArrayList<>();
 
         ArrayList<Drone> drones = new ArrayList<>();
+        Warehouse startPointWarehouse = instance.warehouses[0];
+
 
         for (int i = 0; i < instance.numberOfDrowns; i++){
-            Drone drone = new Drone();
-            drone.currentRow = instance.warehouses[0].row;
-            drone.currentCol = instance.warehouses[0].col;
+            Drone drone = new Drone(i, startPointWarehouse.row, startPointWarehouse.col);
             drones.add(drone);
         }
 
