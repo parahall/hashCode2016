@@ -57,6 +57,21 @@ public class Drone {
         // calculate task weight;
         int weight = task.getWeight(instance);
 
+        if (weight > instance.droneMaxLoad){
+            SorterTask cutoff = splitOrder(task);
+
+        } else {
+
+        }
+
+        return null;
+    }
+
+    private SorterTask splitOrder(SorterTask task) {
+        // TODO: Implement.
+        // this should take the task,
+        // split it (mutate it so it will fit)
+        // and return the cut off.
 
         return null;
     }
