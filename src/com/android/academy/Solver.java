@@ -17,8 +17,6 @@ public class Solver {
             sorterTasks.add(new SorterTask(order.row, order.col, order.orderlines));
         }
 
-
-        ArrayList<DeliveryTask> DeliveryTasks = new ArrayList<>();
         ArrayList<DeliveryTask> deliveryTasks = new ArrayList<>();
 
         ArrayList<Drone> drones = new ArrayList<>();

@@ -16,7 +16,7 @@ public class Drone {
     public int movmentEndTime;
 
     public DroneInstruction ExecuteTurn(ArrayList<SorterTask> sorterTasks, ArrayList<DeliveryTask> deliveryTasks){
-        
+
 
 
 
