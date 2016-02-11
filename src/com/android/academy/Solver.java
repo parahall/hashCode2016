@@ -8,7 +8,7 @@ public class Solver {
 
         ArrayList<SorterTask> sorterTasks = new ArrayList<>();
 
-        
+
 
 
         ArrayList<DeliveryTask> DeliveryTasks = new ArrayList<>();
