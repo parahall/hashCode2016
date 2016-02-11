@@ -12,8 +12,11 @@ public class ProblemInstance {
     public int deadline;
     public int droneMaxLoad;
 
-    
 
+    public int[] productWegihts;
 
+    public Warehouse[] warehouses;
+
+    public Order[] orders;
 
 }
