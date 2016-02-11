@@ -1,7 +1,6 @@
 package com.android.academy;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -12,21 +11,11 @@ public class Main {
             String input = args[0];
             ProblemInstance problemInstance = new ProblemInstance();
             try (BufferedReader br = new BufferedReader(new FileReader(input))) {
-                String line;
-                for (int i = 0; (line = br.readLine()) != null; i++) {
-                    switch (i) {
-                        case 0:
-                            parseSimulationParams(problemInstance, line);
-                            break;
-                        case 1:
-                            initProductWeights(problemInstance, line);
-                            break;
-                        case 2:
-                            parseProductWeights(problemInstance, line);
-                            break;
-                    }
-
-                }
+                parseSimulationParams(problemInstance, br);
+                initProductWeights(problemInstance, br);
+                parseProductWeights(problemInstance, br);
+                parseNumberWarehouses(problemInstance, br);
+                parseWarehousesContent(problemInstance, br);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -34,11 +23,34 @@ public class Main {
         }
     }
 
-    private static void initProductWeights(ProblemInstance problemInstance, String line) {
+    private static void parseWarehousesContent(ProblemInstance problemInstance, BufferedReader br) throws IOException {
+        for (int i = 0; i < problemInstance.warehouses.length; i++) {
+            String line = br.readLine();
+            String[] location = line.split(" ");
+            problemInstance.warehouses[i] = new Warehouse();
+            problemInstance.warehouses[i].row = Integer.parseInt(location[0]);
+            problemInstance.warehouses[i].col = Integer.parseInt(location[1]);
+            line = br.readLine();
+            String[] stock = line.split(" ");
+            problemInstance.warehouses[i].availableStock = new int[stock.length];
+            for (int j = 0; j < stock.length; j++) {
+                problemInstance.warehouses[i].availableStock[j] = Integer.parseInt(stock[j]);
+            }
+        }
+    }
+
+    private static void parseNumberWarehouses(ProblemInstance problemInstance, BufferedReader br) throws IOException {
+        String line = br.readLine();
+        problemInstance.warehouses = new Warehouse[Integer.parseInt(line)];
+    }
+
+    private static void initProductWeights(ProblemInstance problemInstance, BufferedReader br) throws IOException {
+        String line = br.readLine();
         problemInstance.productWegihts = new int[Integer.parseInt(line)];
     }
 
-    private static void parseProductWeights(ProblemInstance problemInstance, String line) {
+    private static void parseProductWeights(ProblemInstance problemInstance, BufferedReader br) throws IOException {
+        String line = br.readLine();
         String[] split;
         split = line.split(" ");
         for (int j = 0; j < split.length; j++) {
@@ -46,7 +58,8 @@ public class Main {
         }
     }
 
-    private static void parseSimulationParams(ProblemInstance problemInstance, String line) {
+    private static void parseSimulationParams(ProblemInstance problemInstance, BufferedReader br) throws IOException {
+        String line = br.readLine();
         String[] split = line.split(" ");
         problemInstance.rows = Integer.parseInt(split[0]);
         problemInstance.cols = Integer.parseInt(split[1]);
