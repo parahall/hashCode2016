@@ -7,14 +7,13 @@ import java.util.ArrayList;
  */
 public class Solver {
     public static ArrayList<DroneInstruction> solve(ProblemInstance instance) {
+
+        // Prepare
+
         ArrayList<DroneInstruction> instuctions = new ArrayList<>();
 
         ArrayList<SorterTask> sorterTasks = new ArrayList<>();
-
-        
-
-
-        ArrayList<DeliveryTask> DeliveryTasks = new ArrayList<>();
+        ArrayList<DeliveryTask> deliveryTasks = new ArrayList<>();
 
         ArrayList<Drone> drones = new ArrayList<>();
 
@@ -27,11 +26,13 @@ public class Solver {
 
 
 
+        // Write instructions
+        boolean stillGoing = true;
+        while (stillGoing && (sorterTasks.size() > 0 || deliveryTasks.size() > 0)){
 
 
 
-
-
+        }
 
         return instuctions;
     }

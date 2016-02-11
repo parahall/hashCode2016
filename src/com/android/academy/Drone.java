@@ -15,7 +15,11 @@ public class Drone {
     public int movmentStartTime;
     public int movmentEndTime;
 
-    public DroneInstruction ExecuteTurn(ArrayList<SorterTask> sorterTasks){
+    public DroneInstruction ExecuteTurn(ArrayList<SorterTask> sorterTasks, ArrayList<DeliveryTask> deliveryTasks){
+        
+
+
+
         DroneInstruction instruction;
 
         if (isSorter)
@@ -25,7 +29,7 @@ public class Drone {
             instruction = executeDelivererTurn();
         }
 
-        return null;
+        return instruction;
     }
 
     private DroneInstruction executeDelivererTurn() {
