@@ -7,8 +7,12 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        if (args[0] != null && args[0].length() > 0) {
-            String input = args[0];
+        initParsing(args[0]);
+    }
+
+    private static void initParsing(String arg) {
+        if (arg != null && arg.length() > 0) {
+            String input = arg;
             ProblemInstance problemInstance = new ProblemInstance();
             try (BufferedReader br = new BufferedReader(new FileReader(input))) {
                 parseSimulationParams(problemInstance, br);
@@ -19,7 +23,6 @@ public class Main {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
         }
     }
 
